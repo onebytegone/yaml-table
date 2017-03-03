@@ -1,0 +1,8 @@
+# Coverage directory (e.g. istanbul)
+coverage
+
+# NPM
+node_modules
+
+# OS
+.DS_Store

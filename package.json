@@ -1,0 +1,21 @@
+{
+  "name": "tooling-base",
+  "version": "0.0.1",
+  "description": "A basic foundation for CLI tools in node",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt standards && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec 'tests/**/*.test.js'"
+  },
+  "author": "Ethan Smith",
+  "license": "MIT",
+  "devDependencies": {
+    "coveralls": "2.11.16",
+    "eslint": "3.16.1",
+    "grunt": "1.0.1",
+    "grunt-cli": "1.2.0",
+    "grunt-eslint": "19.0.0",
+    "istanbul": "0.4.5",
+    "mocha": "3.2.0",
+    "eslint-config-silvermine": "1.0.1"
+  }
+}
