@@ -24,6 +24,9 @@
          font-weight: lighter;
       }
    </style>
+   {% for file in include.css %}
+      <link rel="stylesheet" type="text/css" href="{{ file }}">
+   {% endfor %}
 </head>
 <body>
 <span class="timestamp">{{ timestamp }}</span>

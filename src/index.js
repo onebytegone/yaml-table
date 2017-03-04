@@ -14,7 +14,8 @@ module.exports = Class.extend({
       options = _.extend({
          templateRoot: './templates',
          template: 'basic-table.html',
-         sorting: []
+         sorting: [],
+         include: {}
       }, options);
 
       options.columns = options.columns || {};
@@ -40,7 +41,8 @@ module.exports = Class.extend({
          columns: columns,
          rows: rows,
          columnOrder: columnKeys,
-         timestamp: moment().format('Y-MM-DD h:mma')
+         timestamp: moment().format('Y-MM-DD h:mma'),
+         include: options.include
       });
    },
 

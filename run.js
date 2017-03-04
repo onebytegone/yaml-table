@@ -23,7 +23,8 @@ try {
       {
          title: doc.title,
          columns: doc.columns,
-         sorting: doc.sorting
+         sorting: doc.sorting,
+         include: doc.include
       }
    );
 
