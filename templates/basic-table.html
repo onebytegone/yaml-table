@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>{{ title }}</title>
+   <style type="text/css">
+      body {
+         font-family: sans-serif;
+      }
+      table {
+         border-collapse: collapse;
+         width: 100%;
+      }
+      th, td {
+         border: 1px solid #cccccc;
+         padding: 0.3em;
+      }
+      tr {
+         page-break-inside: avoid;
+      }
+      .timestamp {
+         float: right;
+         font-size: 1.5em;
+         color: #ccc;
+         font-weight: lighter;
+      }
+   </style>
+</head>
+<body>
+<span class="timestamp">{{ timestamp }}</span>
+<h1>{{ title }}</h1>
+<table>
+   <thead>
+      <tr>
+         {% for column in header %}
+            <th>{{ column.value }}</th>
+         {% endfor %}
+      </tr>
+   </thead>
+   <tbody>
+      {% for row in rows %}
+         <tr>
+            {% for column in row.values %}
+               <td>{{ column.value }}</td>
+            {% endfor %}
+         </tr>
+      {% endfor %}
+   </tbody>
+</table>
+</body>
+</html>

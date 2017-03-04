@@ -1,0 +1,48 @@
+title: YAML Table of Animals
+header:
+   name: Name
+   found-in: Found In
+   legs: Leg Count
+   has-fur: Has Fur
+rows:
+   -
+      name: Jaguar
+      found-in: Central America
+      legs: 4
+      has-fur: Yes
+   -
+      name: Aardvark
+      found-in: Africa
+      legs: 4
+      has-fur: No
+   -
+      name: Beaver
+      has-fur: Yes
+      found-in: Rivers
+      legs: 4
+   -
+      name: Whale
+      found-in: Ocean
+      has-fur: No
+      aquatic: Yes
+   -
+      name: Hippopotamus
+      found-in: sub-Saharan Africa
+      legs: 4
+      has-fur: No
+   -
+      name: Gorilla
+      found-in: Central Africa
+      legs: 2
+      has-fur: Yes
+   -
+      name: Gnu
+      found-in: Interwebs
+      legs: No
+      has-fur: No
+   -
+      name: Platypus
+      found-in: Australia
+      legs: Unknown
+      has-fur: No
+      aquatic: Somewhat
