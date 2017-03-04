@@ -9,28 +9,29 @@ module.exports = Class.extend({
 
    generate: function(rows, options) {
       var self = this,
-          headerKeys, header;
+          columnKeys, columns;
 
       options = _.extend({
          templateRoot: './templates',
          template: 'basic-table.html'
       }, options);
 
-      headerKeys = this.findAllKeysUsed(rows);
-      header = _.map(headerKeys, function(value) {
-         return options.header[value] || value;
+      options.columns = options.columns || {};
+      columnKeys = this.findAllKeysUsed(rows);
+      columns = _.map(columnKeys, function(value) {
+         return options.columns[value] || value;
       });
-      header = _.map(header, this.upgradeToValueObjectIfNeeded);
+      columns = _.map(columns, this.upgradeToValueObjectIfNeeded);
 
       rows = _.map(rows, function(values) {
-         return self.generateRow(values, headerKeys);
+         return self.generateRow(values, columnKeys);
       });
 
       nunjucks.configure(options.templateRoot, { autoescape: true });
 
       return nunjucks.render(options.template, {
          title: options.title,
-         header: header,
+         columns: columns,
          rows: rows,
          timestamp: moment().format('Y-MM-DD h:mma')
       });

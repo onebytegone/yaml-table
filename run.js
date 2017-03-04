@@ -22,7 +22,7 @@ try {
       doc.rows,
       {
          title: doc.title,
-         header: doc.header,
+         columns: doc.columns,
       }
    );
 

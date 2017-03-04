@@ -1,5 +1,5 @@
 title: YAML Table of Animals
-header:
+columns:
    name: Name
    found-in: Found In
    legs: Leg Count
