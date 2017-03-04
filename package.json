@@ -1,7 +1,7 @@
 {
-  "name": "tooling-base",
+  "name": "yaml-table",
   "version": "0.0.1",
-  "description": "A basic foundation for CLI tools in node",
+  "description": "A generator to create printable HTML tables from a YAML file",
   "main": "index.js",
   "scripts": {
     "test": "grunt standards && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec 'tests/**/*.test.js'"
