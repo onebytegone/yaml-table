@@ -37,7 +37,7 @@
          {% for key in columnOrder %}
             {% set column = columns[key] %}
             {% if not column.hidden %}
-               <th>{{ column.value }}</th>
+               <th class="{{ key }}">{{ column.value }}</th>
             {% endif %}
          {% endfor %}
       </tr>
@@ -48,7 +48,7 @@
             {% for key in columnOrder %}
                {% set column = row.values[key] %}
                {% if not column.hidden %}
-                  <td>{{ column.value }}</td>
+                  <td class="{{ key }}">{{ column.value }}</td>
                {% endif %}
             {% endfor %}
          </tr>
