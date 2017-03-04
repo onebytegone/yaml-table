@@ -49,7 +49,7 @@
             {% for key in columnOrder %}
                {% set column = row.values[key] %}
                {% if not column.hidden %}
-                  <td class="{{ key }}">{{ column.value }}</td>
+                  <td class="{{ key }}">{{ column.value | escape |  nl2br }}</td>
                {% endif %}
             {% endfor %}
          </tr>
