@@ -1,6 +1,6 @@
-# tooling-base
+# yaml-table
 
-A base setup for simple node.js CLI tools.
+Generate basic printable HTML page from a YML file.
 
 
 ## License
