@@ -14,6 +14,7 @@ module.exports = Class.extend({
       options = _.extend({
          templateRoot: './templates',
          template: 'basic-table.html',
+         sorting: []
       }, options);
 
       options.columns = options.columns || {};
@@ -29,6 +30,8 @@ module.exports = Class.extend({
             columns: columns
          });
       });
+
+      rows = this.sortRows(rows, options.sorting);
 
       nunjucks.configure(options.templateRoot, { autoescape: true });
 
@@ -94,6 +97,14 @@ module.exports = Class.extend({
             data
          )
       );
+   },
+
+   sortRows: function(rows, fields) {
+      return _.reduce(fields.reverse(), function(memo, field) {
+         return _.sortBy(memo, function(row) {
+            return (row.values[field] || {}).value;
+         });
+      }, rows);
    }
 
 });

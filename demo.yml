@@ -9,6 +9,9 @@ columns:
    legs:
       hidden: true
    has-fur: Has Fur
+sorting:
+   - has-fur
+   - name
 rows:
    -
       name: Jaguar
