@@ -31,7 +31,8 @@
 <table>
    <thead>
       <tr>
-         {% for column in columns %}
+         {% for key in columnOrder %}
+            {% set column = columns[key] %}
             {% if not column.hidden %}
                <th>{{ column.value }}</th>
             {% endif %}
@@ -41,7 +42,8 @@
    <tbody>
       {% for row in rows %}
          <tr>
-            {% for column in row.values %}
+            {% for key in columnOrder %}
+               {% set column = row.values[key] %}
                {% if not column.hidden %}
                   <td>{{ column.value }}</td>
                {% endif %}

@@ -34,10 +34,9 @@ module.exports = Class.extend({
 
       return nunjucks.render(options.template, {
          title: options.title,
-         columns: _.map(columnKeys, function(key) {
-            return columns[key];
-         }),
+         columns: columns,
          rows: rows,
+         columnOrder: columnKeys,
          timestamp: moment().format('Y-MM-DD h:mma')
       });
    },
@@ -48,7 +47,7 @@ module.exports = Class.extend({
       }, []);
    },
 
-   generateRow: function(values, columnOrder, config) {
+   generateRow: function(values, neededColumns, config) {
       var self = this;
 
       config = _.extend({
@@ -56,12 +55,12 @@ module.exports = Class.extend({
       }, config || {});
 
       return {
-         values: _.map(columnOrder, function(key) {
+         values: _.reduce(neededColumns, function(memo, key) {
             var columnConfig = config.columns[key] || {},
                 source, value;
 
             if (columnConfig.type === 'composite' && columnConfig.format) {
-               source = self.generateCompositeValue(values, columnConfig.format, columnOrder);
+               source = self.generateCompositeValue(values, columnConfig.format, neededColumns);
             } else {
                source = values[key] || '';
             }
@@ -69,8 +68,10 @@ module.exports = Class.extend({
             value = self.upgradeToValueObjectIfNeeded(source);
             value.hidden = columnConfig.hidden;
 
-            return value;
-         })
+            memo[key] = value;
+
+            return memo;
+         }, {})
       };
    },
 
