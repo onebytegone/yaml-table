@@ -17,7 +17,7 @@ module.exports = Class.extend({
       }, options);
 
       options.columns = options.columns || {};
-      columnKeys = this.findAllKeysUsed(rows);
+      columnKeys = _.union(_.keys(options.columns), this.findAllKeysUsed(rows));
       columns = _.map(columnKeys, function(value) {
          return options.columns[value] || value;
       });
@@ -57,9 +57,17 @@ module.exports = Class.extend({
 
       return {
          values: _.map(columnOrder, function(key) {
-            var value = self.upgradeToValueObjectIfNeeded(values[key] || '');
+            var columnConfig = config.columns[key] || {},
+                source, value;
 
-            value.hidden = config.columns[key] ? config.columns[key].hidden : false;
+            if (columnConfig.type === 'composite' && columnConfig.format) {
+               source = self.generateCompositeValue(values, columnConfig.format, columnOrder);
+            } else {
+               source = values[key] || '';
+            }
+
+            value = self.upgradeToValueObjectIfNeeded(source);
+            value.hidden = columnConfig.hidden;
 
             return value;
          })
@@ -74,6 +82,17 @@ module.exports = Class.extend({
       return {
          value: value
       };
+   },
+
+   generateCompositeValue: function(data, format, allFields) {
+      return _.template(format)(
+         _.extend(
+            _.object(allFields, _.map(allFields, function() {
+               return '';
+            })),
+            data
+         )
+      );
    }
 
 });
