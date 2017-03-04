@@ -32,7 +32,9 @@
    <thead>
       <tr>
          {% for column in columns %}
-            <th>{{ column.value }}</th>
+            {% if not column.hidden %}
+               <th>{{ column.value }}</th>
+            {% endif %}
          {% endfor %}
       </tr>
    </thead>
@@ -40,7 +42,9 @@
       {% for row in rows %}
          <tr>
             {% for column in row.values %}
-               <td>{{ column.value }}</td>
+               {% if not column.hidden %}
+                  <td>{{ column.value }}</td>
+               {% endif %}
             {% endfor %}
          </tr>
       {% endfor %}

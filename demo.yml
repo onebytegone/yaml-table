@@ -2,7 +2,9 @@ title: YAML Table of Animals
 columns:
    name: Name
    found-in: Found In
-   legs: Leg Count
+   legs:
+      value: Leg Count
+      hidden: true
    has-fur: Has Fur
 rows:
    -

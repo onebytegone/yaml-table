@@ -13,7 +13,7 @@ module.exports = Class.extend({
 
       options = _.extend({
          templateRoot: './templates',
-         template: 'basic-table.html'
+         template: 'basic-table.html',
       }, options);
 
       options.columns = options.columns || {};
@@ -22,16 +22,21 @@ module.exports = Class.extend({
          return options.columns[value] || value;
       });
       columns = _.map(columns, this.upgradeToValueObjectIfNeeded);
+      columns = _.object(columnKeys, columns);
 
       rows = _.map(rows, function(values) {
-         return self.generateRow(values, columnKeys);
+         return self.generateRow(values, columnKeys, {
+            columns: columns
+         });
       });
 
       nunjucks.configure(options.templateRoot, { autoescape: true });
 
       return nunjucks.render(options.template, {
          title: options.title,
-         columns: columns,
+         columns: _.map(columnKeys, function(key) {
+            return columns[key];
+         }),
          rows: rows,
          timestamp: moment().format('Y-MM-DD h:mma')
       });
@@ -43,12 +48,20 @@ module.exports = Class.extend({
       }, []);
    },
 
-   generateRow: function(values, columnKeys) {
+   generateRow: function(values, columnOrder, config) {
       var self = this;
 
+      config = _.extend({
+         columns: {}
+      }, config || {});
+
       return {
-         values: _.map(columnKeys, function(key) {
-            return self.upgradeToValueObjectIfNeeded(values[key] || '');
+         values: _.map(columnOrder, function(key) {
+            var value = self.upgradeToValueObjectIfNeeded(values[key] || '');
+
+            value.hidden = config.columns[key] ? config.columns[key].hidden : false;
+
+            return value;
          })
       };
    },
